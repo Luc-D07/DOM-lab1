@@ -7,25 +7,32 @@ let currentTotal = 0;
 //refactor
 buttonContainer.addEventListener("click", (event) => {
     if (event.target.classList.contains("button")) {
+        //this looks at the index and pulls info from the class data-amount, Number converts string to an actual number value
         let amount = Number(event.target.getAttribute("data-amount"));
         console.log(amount);
+        //below updates the "calculator"
         currentTotal += amount;
+        //toFixed allows us to have decimal places, value 2 tells us how many places
         total.innerText = `Total: $${currentTotal.toFixed(2)}`;
     }
 });
 
+// Challenge 2
 let coinForm = document.querySelector(".form");
 let coinContainer = document.querySelector(".coin-container")
 coinForm.addEventListener("submit", (event) => {
+    //prevents page from refreshing
     event.preventDefault();
     const data = new FormData(coinForm);
     let amount = data.get("amount")
     let coin = data.get("coin")
     console.log(amount, coin)
     for (let i = 0; i < amount; i++) {
+        // createElement creates a class inside js that can be used in the page
         let coinDiv = document.createElement("div");
         coinDiv.classList.add("coin-div")
         coinDiv.innerText = coin;
+        //append a method to add a class to the page
         coinContainer.append(coinDiv);
     }
     coinForm.reset();
